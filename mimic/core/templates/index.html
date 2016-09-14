@@ -1,10 +1,39 @@
+{% load bootstrap3 %}
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-fooo
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        {% bootstrap_css %}
+        <script type="application/x-javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        {% bootstrap_javascript %}
+        <style>
+            textarea.form-control {
+                width: 40%;
+
+            }
+            body {
+                margin-left: 50px;
+            }
+        </style>
+
+    </head>
+    {% bootstrap_messages %}
+    <body>
+        <h2>Text Mimic Generator</h2>
+        <h3>Viaja na maionese à partir do seu texto</h3>
+        <form action="." method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    {% bootstrap_icon "star" %} Enviar!
+                </button>
+            {% endbuttons %}
+
+        </form>
+    </body>
 </html>
