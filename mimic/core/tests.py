@@ -6,6 +6,7 @@ from mimic.core.forms import SubmitText
 class HomeTest(TestCase):
     def setUp(self):
         self.response = self.client.get('/')
+        self.form = SubmitText()
 
     def test_get(self):
         """
@@ -54,3 +55,18 @@ class HomeTest(TestCase):
     def test_input_submit(self):
         """html must contain {% csrf_token %}"""
         self.assertContains(self.response, '<button type="submit"')
+
+    def test_has_blog_link(self):
+        self.assertContains(self.response, '<a class="btn btn-success" href="http://liquuid.me" type="link">')
+
+    def test_has_twitter_user(self):
+        self.assertContains(self.response, '<a class="btn btn-info" href="https://twitter.com/liquuid" type="link">')
+
+    def test_form_has_fields(self):
+        form = self.response.context['form']
+        self.assertSequenceEqual(['text',], list(form.fields))
+
+class SubmitTextTest(TestCase):
+    def setUp(self):
+        self.data = dict(text="mi mi mi")
+        self.response = self.client.post('/', self.data)

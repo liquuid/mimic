@@ -17,23 +17,36 @@
             body {
                 margin-left: 50px;
             }
+            .alert-success{
+                width: 40%;
+            }
         </style>
 
     </head>
-    {% bootstrap_messages %}
+
     <body>
         <h2>Text Mimic Generator</h2>
         <h3>Viaja na maionese à partir do seu texto</h3>
+        <div class="left-stuff">
         <form action="." method="post">
             {% csrf_token %}
             {% bootstrap_form form %}
 
             {% buttons %}
                 <button type="submit" class="btn btn-primary">
-                    {% bootstrap_icon "star" %} Enviar!
+                    {% bootstrap_icon "refresh" %} Gerar!
                 </button>
             {% endbuttons %}
 
         </form>
+        </div>
+        <div class="right-stuff">
+            {% bootstrap_messages %}
+        </div>
+        visit us: {% bootstrap_button "liquuid.me" icon="bookmark" button_type="link" button_class="btn-success" href="http://liquuid.me" %}
+        folow us: {% bootstrap_button "@liquuid" icon="bullhorn"  button_type="link" button_class="btn-info" href="https://twitter.com/liquuid" %}
+
+
+
     </body>
 </html>
